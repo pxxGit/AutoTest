@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<suite name="suite">    //定义suite name
+    <test name="login"> //定义test name
+        <classes>
+            <class name="Suite.SuiteConfig"/>
+            <class name="Suite.LoginTest"/>
+        </classes>
+    </test>
+
+    <test name="pay">
+        <classes>
+            <class name="Suite.SuiteConfig"/>
+            <class name="Suite.PayTest"/>
+        </classes>
+    </test>
+
+</suite>

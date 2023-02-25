@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<suite name="TeacherStudents">
+    //第一个test运行全部语句
+    <test name="RunTeacherAndStudent">
+        <classes>
+            <class name="Groups.GroupsClass01"/>
+            <class name="Groups.GroupsClass02"/>
+            <class name="Groups.GroupsClass03"/>
+        </classes>
+    </test>
+
+    //第二个test根据筛选只运行，groups name="student"的类
+    <test name="onlyRunStudent">
+        <groups>
+            <run>
+                <include name="student"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="Groups.GroupsClass01"/>
+            <class name="Groups.GroupsClass02"/>
+            <class name="Groups.GroupsClass03"/>
+        </classes>
+    </test>
+
+    //第三个test根据筛选只运行，groups name="teacher"的类
+    <test name="onlyRunTeacher">
+        <groups>
+            <run>
+                <include name="teacher"/>
+            </run>
+        </groups>
+        <classes>
+            <class name="Groups.GroupsClass01"/>
+            <class name="Groups.GroupsClass02"/>
+            <class name="Groups.GroupsClass03"/>
+        </classes>
+    </test>
+</suite>

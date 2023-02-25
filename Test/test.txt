@@ -1,2 +1,105 @@
-本地文件测试，上传github代码库
-github代码库文件修改，pull到本地
+
+    一、环境搭建：https://www.codenong.com/cs106047740/
+        1.Java环境配置
+        2.Maven配置
+            2.1 下载Maven安装后，配置maven环境变量
+            2.2 在cmd中查看Maven版本，mvn -version
+        3.TestNG配置
+            3.1 打开IDEA，settings——plugins——搜索testng，安装creat testng xml和testng
+            3.2 插入依赖，生成testng.xml文件
+        问题：
+        https://blog.csdn.net/weixin_45548912/article/details/105199163
+
+    二、注解实战      ---见BaseAnnotation
+        1.@Test：最基本注解，用来把方法标记为测试的一部分 (enable=false)
+        2.@BeforeMethod：在方法之前每次调用
+        3.@AfterMethod：在方法之前每次调用
+        4.@BeforeClass：在类之前运行
+        5.@AfterClass：在类之后运行
+        6.@BeforeSuite：在测试套件之前运行
+        7.@AfterSuite：在测试套件之后运行
+        8.@BeforeTest：在Test测试方法之前调用一次
+        9.@AfterTest：在Test测试方法之后调用一次
+        10.@BeforeGroups：在组运行之前运行，后接("组名")
+        11.@AfterGroups：在组运行之后运行，结合分组@Test(groups="server")使用
+
+        @Test(enable=false)：test方法是否执行
+        @Test(groups="server")：方法进行分组
+
+
+    三、套件测试      ---见Suite包下的LoginTest，PayTest，SuiteConfig以及resources包下的Suite.xml配置文件
+        1.在resources下创建.xml文件（File文件）
+        2.创建多个class文件运行
+
+       .xml文件配置
+       <?xml version="1.0" encoding="UTF-8" ?>
+       <suite name="suite">      //需要定义suite name标签
+           <test name="login">       //需要定义test name标签
+               <classes>
+                   <class name="Suite.SuiteConfig"/>
+                   <class name="Suite.LoginTest"/>
+               </classes>
+           </test>
+
+           <test name="pay">
+               <classes>
+                   <class name="Suite.SuiteConfig"/>
+                   <class name="Suite.PayTest"/>
+               </classes>
+           </test>
+
+       </suite>
+
+    四、忽略测试      ---见IgnoreTest
+        @Test(enabled=false)
+        enabled=false：不执行
+        enabled=true：执行
+
+    五、组测试中的方法分组测试       ---见Groups-GroupsMethodTest
+        在方法之前进行分组
+        @Test(groups="组名")：方法进行分组
+        @BeforeGroups：在组运行之前运行，后接("组名")
+        @AfterGroups：在组运行之后运行，结合分组@Test(groups="server")使用
+
+    六、组测试中类分组测试         ---见Groups-GroupsClass01-03，TeacherStudents.xml文件
+        在类之前进行分组
+        @Test(group="组名")
+        在xml配置文件中进行配置：<groups>中仅运行自己指定的分组类
+        <test name="onlyRunStudent">
+                <groups>
+                    <run>
+                        <include name="student"/>
+                    </run>
+                </groups>
+                <classes>
+                    <class name="Groups.GroupsClass01"/>
+                    <class name="Groups.GroupsClass02"/>
+                    <class name="Groups.GroupsClass03"/>
+                </classes>
+            </test>
+
+    七、异常测试      ---见com.course.testng-ExceptionTest
+        期望结果是某个异常
+
+    八、依赖测试      ---见DependTest
+        两个方法依赖关系，如果方法2依赖方法1，当方法1执行成功时，方法2才能执行；当方法1执行失败时，方法2就不执行
+        所以当Test01抛出异常时，Test02方法无法成功执行
+
+    九、参数化测试，xml文件参数化        ---见Param中的ParameterTest+Parameter.xml文件
+        @Parameters({"testName","testAge"})
+        通过xml文件中的parameter进行参数化
+
+        <suite name="parameter01">
+            <test name="parameter02">
+                <classes>
+                    <class name="Param.ParameterTest"/>
+                    <parameter name="testName" value="阿珍"/>
+                    <parameter name="testAge" value="19"/>
+                </classes>
+            </test>
+        </suite>
+
+    十、参数化测试，DataProvider参数化         ---见Param中的DataProviderTest
+        通过dataprovider进行传参
+        @Test(dataProvider = "dataTest")
+        @DataProvider(name = "dataTest")
